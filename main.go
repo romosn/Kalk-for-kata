@@ -126,7 +126,7 @@ func rimiliarab(chislo1 string, chislo2 string) (int, int, int) {
 	} else if chislo2 == "X" {
 		b = 10
 	} else {
-
+		z = 5
 	}
 	return a, b, z
 }
@@ -148,19 +148,11 @@ func finish(a int, b int, op int, x int) int {
 	if op == 1 {
 		return a + b
 	} else if op == 2 {
-		if x == 0 && a-b <= 0 {
-			//fmt.Println("Выдача паники, так как в римской системе нет отрицательных чисел.\n")
-			return -1
-		} else {
-			return a - b
-		}
-
+		return a - b
 	} else if op == 3 {
 		return a * b
-	} else if op == 4 {
+	} else { // если ор == 4
 		return a / b
-	} else {
-		return -2
 	}
 }
 
@@ -168,8 +160,10 @@ func vivod(rez int, z int) {
 	if z == 2 {
 		fmt.Println(rez)
 	} else if z == 0 {
-		if rez == -1 {
+		if rez < 0 {
 			fmt.Println("Выдача паники, так как в римской системе нет отрицательных чисел.")
+		} else if rez == 0 {
+			fmt.Println("Выдача паники, так как в римской системе нет нуля.")
 		} else if rez == 1 {
 			fmt.Println("I")
 		} else if rez == 2 {
@@ -206,6 +200,8 @@ func vivod(rez int, z int) {
 			fmt.Println("XVII")
 		} else if rez == 18 {
 			fmt.Println("XVIII")
+		} else if rez == 19 {
+			fmt.Println("XIX")
 		} else if rez == 20 {
 			fmt.Println("XX")
 		} else if rez == 21 {
@@ -275,17 +271,14 @@ func main() {
 		var a, b, z, op int
 		// z - переменная в котором зашифоровано римские числа или арабские. z=0 римские, z=1 одно число арабское и другое римское, z = 2 арабские, z= 5 говорит, что одно или оба члена операции не подходят под условия задачи
 		a, b, z = rimiliarab(chislo1, chislo2)
-		//		fmt.Println(a, b, z)
 		if z == 5 {
 			fmt.Println("Паника, одно или оба члена операции не подходят под условия задачи")
 		} else if z == 1 {
 			fmt.Println("Паника, так как используются одновременно разные системы счисления.")
 		} else {
 			op = znaktoop(znak)
-			//			fmt.Println(op, "\n")
 			var rez int
 			rez = finish(a, b, op, z)
-			//			fmt.Println(rez)
 			vivod(rez, z)
 		}
 	}
